@@ -2,9 +2,9 @@ HOSTS:
   centos-65-x64:
     roles:
       - master
-    platform: el-6-i386
-    box : centos-65-x64-vbox4210-nocm
-    box_url : http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box
+    platform: el-6-x64
+    box : centos-65-x64-virtualbox-nocm
+    box_url : http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-nocm.box
     hypervisor : vagrant
 CONFIG:
   log_level: debug
