@@ -98,7 +98,8 @@ describe "elasticsearch template define:" do
   describe "Insert a template with valid json content" do
 
     it 'should run successfully' do
-      pp = "elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/good.json' }"
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
+          elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/good.json' }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
@@ -110,7 +111,8 @@ describe "elasticsearch template define:" do
   describe "Insert a template with bad json content" do
 
     it 'run should fail' do
-      pp = "elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/bad.json' }"
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
+          elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/bad.json' }"
 
       apply_manifest(pp, :expect_failures => true)
     end
