@@ -45,7 +45,7 @@ define elasticsearch::template(
   $port    = 9200
 ) {
 
-  require elasticsearch
+  #require elasticsearch
 
   # ensure
   if ! ($ensure in [ 'present', 'absent' ]) {

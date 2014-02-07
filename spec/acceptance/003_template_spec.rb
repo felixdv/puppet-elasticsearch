@@ -92,8 +92,8 @@ bad_json='{
 describe "elasticsearch template define:" do
 
   shell("mkdir -p #{default['distmoduledir']}/another/files")
-  shell("echo \"#{good_json}\" >> #{default['distmoduledir']}/another/files/good.json")
-  shell("echo \"#{bad_json}\" >> #{default['distmoduledir']}/another/files/bad.json")
+  shell("echo '#{good_json}' >> #{default['distmoduledir']}/another/files/good.json")
+  shell("echo '#{bad_json}' >> #{default['distmoduledir']}/another/files/bad.json")
 
   describe "Insert a template with valid json content" do
 
