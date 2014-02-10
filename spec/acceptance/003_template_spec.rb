@@ -108,18 +108,22 @@ describe "elasticsearch template define:" do
 
   end
 
-  #describe "Insert a template with bad json content" do
-  #
-  #  it 'run should fail' do
-  #    pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
-  #        elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/bad.json' }"
-#
-#      apply_manifest(pp, :expect_failures => true)
-#      confine :to, :puppetversion => /3\.[2-9]\./
-#    end
-#
-#  end
+  if fact('puppetversion') =~ /3\.[2-9]\./
+    describe "Insert a template with bad json content" do
 
+      it 'run should fail' do
+        pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
+             elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/bad.json' }"
+
+        apply_manifest(pp, :expect_failures => true)
+      end
+
+    end
+
+  else
+    # The exit codes have changes since Puppet 3.2x
+    # Since beaker expectations are based on the most recent puppet code All runs on previous versions fails.
+  end
 
 end
 

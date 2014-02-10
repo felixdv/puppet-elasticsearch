@@ -14,7 +14,7 @@ describe "elasticsearch class:" do
   describe "default parameters" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }"
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }"
 
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
@@ -40,7 +40,7 @@ describe "elasticsearch class:" do
 
     describe file('/etc/elasticsearch/elasticsearch.yml') do
       it { should be_file }
-      its(:content) { should match /name: elasticsearch001/ }
+      it { should contain 'name: elasticsearch001' }
     end
 
     describe file('/etc/elasticsearch/templates_import') do
