@@ -38,7 +38,15 @@ describe "elasticsearch class:" do
       }
     end
 
+    describe file('/etc/elasticsearch/elasticsearch.yml') do
+      it { should be_file }
+      its(:content) { should match /name: elasticsearch001/ }
+    end
+
+    describe file('/etc/elasticsearch/templates_import') do
+      it { should be_directory }
+    end
+
   end
 
 end
-
