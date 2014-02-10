@@ -19,6 +19,7 @@ describe "elasticsearch plugin define:" do
     end
 
     it 'make sure elasticsearch reports it as existing' do
+      sleep 10
       shell("/usr/bin/curl http://localhost:9200/_nodes/?plugin | grep head", {:acceptable_exit_codes => 0})
     end
 
@@ -41,6 +42,7 @@ describe "elasticsearch plugin define:" do
     end
 
     it 'make sure elasticsearch reports it as existing' do
+      sleep 10
       shell("/usr/bin/curl http://localhost:9200/_nodes/?plugin | grep jetty", {:acceptable_exit_codes => 0})
     end
 
