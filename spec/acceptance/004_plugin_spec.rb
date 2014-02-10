@@ -14,6 +14,14 @@ describe "elasticsearch plugin define:" do
       expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
     end
 
+    it 'make sure the directory exists' do
+      shell('ls /usr/share/elasticsearch/plugins/head/', {:acceptable_exit_codes => 0})
+    end
+
+    it 'make sure elasticsearch reports it as existing' do
+      shell("/usr/bin/curl http://localhost:9200/_nodes/?plugin | grep head", {:acceptable_exit_codes => 0})
+    end
+
   end
 
   describe "Install a plugin from custom git repo" do
@@ -26,6 +34,14 @@ describe "elasticsearch plugin define:" do
       # Run it twice and test for idempotency
       apply_manifest(pp, :catch_failures => true)
       expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
+    end
+
+    it 'make sure the directory exists' do
+      shell('ls /usr/share/elasticsearch/plugins/jetty/', {:acceptable_exit_codes => 0})
+    end
+
+    it 'make sure elasticsearch reports it as existing' do
+      shell("/usr/bin/curl http://localhost:9200/_nodes/?plugin | grep jetty", {:acceptable_exit_codes => 0})
     end
 
   end

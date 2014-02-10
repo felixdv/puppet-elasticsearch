@@ -30,6 +30,10 @@ describe "elasticsearch class:" do
       it { should be_installed }
     end
 
+    describe port(9200) do
+      it { should be_listening }
+    end
+
   end
 
 end
