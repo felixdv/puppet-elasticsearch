@@ -115,7 +115,7 @@ describe "elasticsearch template define:" do
           elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/bad.json' }"
 
       apply_manifest(pp, :expect_failures => true)
-      confine :to, :puppetversion => /3.[2-9].*/
+      confine :to, :puppetversion => /3\.[2-9]\./
     end
 
   end
