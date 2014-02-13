@@ -5,7 +5,7 @@ gem 'puppet', puppetversion, :require => false
 gem 'puppet-lint'
 gem 'rspec-puppet', :git => 'https://github.com/rodjek/rspec-puppet.git'
 gem 'puppetlabs_spec_helper', '>= 0.1.0'
-gem 'beaker', :git => 'https://github.com/electrical/beaker.git', :branch => 'vagrant_ssh_port'
+gem 'beaker', :git => 'https://github.com/electrical/beaker.git', :branch => 'rand_host_check'
 gem 'beaker-rspec'
 gem 'pry'
 
