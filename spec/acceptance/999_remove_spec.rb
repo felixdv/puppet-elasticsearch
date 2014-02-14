@@ -14,13 +14,16 @@ describe "module removal" do
   it 'should run successfully' do
     pp = "class { 'elasticsearch': ensure => 'absent' }"
 
-    # Run it twice and test for idempotency
     apply_manifest(pp, :catch_failures => true)
-
+    sleep 10
   end
 
   describe file('/etc/elasticsearch') do
     it { should_not be_directory }
+  end
+
+  describe package(package_name) do
+    it { should_not be_installed }
   end
 
   describe port(9200) do
@@ -33,10 +36,6 @@ describe "module removal" do
   describe service(service_name) do
     it { should_not be_enabled }
     it { should_not be_running } 
-  end
-
-  describe package(package_name) do
-    it { should_not be_installed }
   end
 
 end
