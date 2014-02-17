@@ -10,3 +10,4 @@ CONFIG:
   type: foss
   log_level: debug
   vagrant_ssh_port_random: true
+  random_host_names: true
