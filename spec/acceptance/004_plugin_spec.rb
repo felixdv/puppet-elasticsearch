@@ -5,7 +5,7 @@ describe "elasticsearch plugin define:" do
   describe "Install a plugin from official repository" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }
             elasticsearch::plugin{'mobz/elasticsearch-head': module_dir => 'head' }
            "
 
@@ -28,8 +28,8 @@ describe "elasticsearch plugin define:" do
   describe "Install a plugin from custom git repo" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
-            elasticsearch::plugin{ 'elasticsearch-jetty':  module_dir => 'jetty', url => 'https://oss-es-plugins.s3.amazonaws.com/elasticsearch-jetty/elasticsearch-jetty-0.90.0.zip' }
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }
+            elasticsearch::plugin{ 'elasticsearch-jetty':  module_dir => 'jetty', url => 'https://oss-es-plugins.s3.amazonaws.com/elasticsearch-jetty/elasticsearch-jetty-1.0.0.zip' }
            "
 
       # Run it twice and test for idempotency
@@ -54,12 +54,11 @@ describe "elasticsearch plugin define:" do
     describe "Install a non existing plugin" do
 
       it 'should run successfully' do
-        pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
-           elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/good.json' }"
-
+        pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '1.0', java_install => true }
+              elasticsearch::plugin{'elasticsearch/non-existing': module_dir => 'non-existing' }
+	     "
         #  Run it twice and test for idempotency
-        apply_manifest(pp, :catch_failures => true)
-        expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
+        apply_manifest(pp, :expect_failures => true)
       end
 
     end
