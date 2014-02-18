@@ -21,10 +21,10 @@ RSpec.configure do |c|
     # Install module and dependencies
     puppet_module_install(:source => proj_root, :module_name => 'elasticsearch')
     hosts.each do |host|
+      on host, puppet('module','install','puppetlabs-stdlib', '-v 3.2.0'), { :acceptable_exit_codes => [0,1] }
       if fact('osfamily') == 'Debian'
         on host, puppet('module','install','puppetlabs-apt'), { :acceptable_exit_codes => [0,1] }
       end
-      on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end
