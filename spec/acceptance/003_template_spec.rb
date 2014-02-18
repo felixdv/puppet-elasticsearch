@@ -98,7 +98,7 @@ describe "elasticsearch template define:" do
   describe "Insert a template with valid json content" do
 
     it 'should run successfully' do
-      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
+      pp = "class { 'elasticsearch': config => { 'node.name' => 'elasticsearch001' }, manage_repo => true, repo_version => '0.90', java_install => true }
           elasticsearch::template { 'foo': ensure => 'present', file => 'puppet:///modules/another/good.json' }"
 
       # Run it twice and test for idempotency
